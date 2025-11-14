@@ -1,0 +1,58 @@
+# FFM Training Configuration
+training:
+  # Training parameters
+  lr: 0.0001
+  batch_size: 1
+  epochs: 200
+  patch_size: false
+
+  # Data paths
+  train_dir: "C:/Users/pytorch/Desktop/Dataset/dataset/test_train"
+  val_dir: "C:/Users/pytorch/Desktop/Dataset/dataset/test_val"
+
+  # Model saving
+  model_save_dir: "saved/models"
+  model_save_name: "flow_matching_model"
+
+  # Validation settings
+  val_frequency: 5  # Validate every 5 epochs before epoch 100
+  val_frequency_after_100: 10  # Validate every 10 epochs after epoch 100
+  save_frequency: 20  # Save model every 20 epochs
+
+inference:
+  # Inference parameters
+  ode_steps: 50
+  ode_method: "euler"
+  ode_rtol: 1e-4
+  ode_atol: 1e-5
+  ode_step_size: 0.02
+
+  # Test paths
+  test_model_path: "saved/models/flow_matching_model_final.pth"
+  test_lq_dir: "C:/Users/pytorch/Desktop/Dataset/dataset/test_test"
+  test_output_dir: "saved/output"
+
+data:
+  # Data preprocessing
+  transform:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+
+  # DataLoader configuration
+  dataloader:
+    num_workers: 1
+    pin_memory: true
+    persistent_workers: true
+    prefetch_factor: 1
+    drop_last: true
+
+device:
+  # Device configuration
+  cudnn_benchmark: true
+  seed: 42
+
+comet_ml:
+  # Comet ML configuration (optional)
+  api_key: "eEDOoiwzjF6OMzqh4LcGkCCUj"
+  project_name: "Flow Matching"
+  enabled: true
